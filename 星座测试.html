@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+  const message="欢迎您来到星座性格测试网页！🌟🌟🌟马上开始测试吧！😊";
+  alert(message);
+  </script>
+  <meta charset="UTF-8">
+  <title>一起来做星座测试吧！</title>
+  <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #FFA07A;
+      }
+
+      h1 {
+        text-align: center;
+      }
+      h3{
+        text-align: center;
+      }
+
+      form {
+        margin: 20px auto;
+        width: 350px;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #FF7F50;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      input[type="number"] {
+        padding: 10px;
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      button[type="submit"] {
+        padding: 10px;
+        margin-top: 10px;
+        background-color: #0066cc;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button[type="submit"]:hover {
+        background-color: #90EE90;
+      }
+
+      #result {
+        margin: 20px auto;
+        width: 350px;
+        height: 90px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 10px;
+        text-align: center;
+        background-color: #FF7F50;
+      }
+    </style>
+
+</head>
+<body>
+  <h1>一起来做星座测试吧~~</h1>
+  <h3>赶快输入生日月份以及日期来一起测试你是什么星座吧：）</h3>
+
+  <form id="birthdate-form">
+    <label for="birth-month">生日月份：</label>
+    <input type="number" id="birth-month" name="birth-month" min="1" max="12" required>
+    <label for="birth-day">生日日期:</label>
+    <input type="number" id="birth-day" name="birth-day" min="1" max="31" required>
+    <button type="submit">查看自己是什么星座：</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    const form = document.querySelector('#birthdate-form');
+    const resultBox = document.querySelector('#result');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // prevent form submission
+
+      const birthMonth = parseInt(form.elements['birth-month'].value);
+      const birthDay = parseInt(form.elements['birth-day'].value);
+
+      // Define the astrological signs
+      const signs = [
+        { name: '水瓶座，据说这是一个对生活有追求并且有时顽固令人抓摸不定但却注重人道主义的星座哦！', start: { month: 1, day: 20 }, end: { month: 2, day: 18 } },
+        { name: '双鱼座，据说这星座时常多愁善感并且想象力非常丰富。它神经质、健忘，但是却时常牺牲自己来成全他人、是个伟大的星座呢～', start: { month: 2, day: 19 }, end: { month: 3, day: 20 } },
+        { name: '白羊座，据说白羊座是个热爱探索的冒险家呢～虽然脾气是差了点、但是却是个心胸宽大的星座！气消了很快就会没事情啦～', start: { month: 3, day: 21 }, end: { month: 4, day: 19 } },
+        { name: '金牛座，据说金牛是一个保守的星座呢～常常“吃得苦中苦，方为人上人”虽然是个慢热的人、但是却稳重', start: { month: 4, day: 20 }, end: { month: 5, day: 20 } },
+        { name: '双子座，据说双子是一个变化多端的星座呢！常常心不在焉，虽然性格理性但是却充满着各种变化～', start: { month: 5, day: 21 }, end: { month: 6, day: 20 } },
+        { name: '巨蟹座，据说巨蟹是一个非常爱家并且爱收藏的星座呢，就像螃蟹一样虽然有坚硬的外表但却藏着一颗柔软的内心～', start: { month: 6, day: 21 }, end: { month: 7, day: 22 } },
+        { name: '狮子座，据说狮子是一个天生的领导者哦！阳光、热情、自信又大方但是又会让人有些高举临下的感觉呢！', start: { month: 7, day: 23 }, end: { month: 8, day: 22 } },
+        { name: '处女座，一个心思细腻的星座，温柔、善良、有爱心又富有气质的星座🌟', start: { month: 8, day: 23 }, end: { month: 9, day: 22 } },
+        { name: '天秤座，一个公平主义者～追求绝对的公平、和蔼可亲的高情商时常获得周围人的喜爱。但是重感情同时优柔寡断的你会很容易受伤呢...', start: { month: 9, day: 23 }, end: { month: 10, day: 22 } },
+        { name: '天蝎座，一个直觉敏锐的观察家～第六感极强同时精力旺盛且热情🔥但是有时的固执可能会让你很容易撞到墙哦..', start: { month: 10, day: 23 }, end: { month: 11, day: 21 } },
+        { name: '射手座，一个变化多端的星座～爱出走探险的你同时也喜欢追求学问。有机会的话你也可以尝试两份完全不同性质饿的工作！', start: { month: 11, day: 22 }, end: { month: 12, day: 21 } },
+        { name: '魔蝎座，一个忍耐力极强的星座～性格保守、木纳的你或许一不小心就会会让人产生距离感哦...', start: { month: 12, day: 22 }, end: { month: 1, day: 19 } },
+      ];
+
+      // Find the sign that matches the user's birthdate
+      const sign = signs.find(function(sign) {
+        if (birthMonth == sign.start.month && birthDay >= sign.start.day) {
+          return true;
+        }
+        if (birthMonth == sign.end.month && birthDay <= sign.end.day) {
+return true;
+}
+if (birthMonth > sign.start.month && birthMonth < sign.end.month) {
+return true;
+}
+return false;
+});
+// Display the result
+  if (sign) {
+    resultBox.textContent = `你的星座测试结果为 ${sign.name}!`;
+  } else {
+    resultBox.textContent = 'Invalid birthdate.';
+  }
+});
+</script>
+</body>
+</html>
